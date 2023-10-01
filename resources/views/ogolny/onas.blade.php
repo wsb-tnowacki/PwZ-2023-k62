@@ -6,5 +6,12 @@ WSB - O nas
 O nas
 @endsection
 @section('tresc')
-Treść dla informacji o nas
+Treść dla informacji o nas 
+<p>
+    <ol>
+        @foreach ($zadania as $zadanie)
+            <li>{{ $zadanie }}</li>
+        @endforeach
+    </ol>
+</p>
 @endsection
