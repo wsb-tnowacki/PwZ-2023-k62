@@ -41,4 +41,5 @@ Route::controller(StartController::class)->group(function(){
     Route::get('/','start')->name('start');
     Route::get('/kontakt', 'kontakt')->name('kontakt');
     Route::get('/onas', 'onas')->name('onas');
+    Route::get('/onas/{id}/test/{onas}', 'onas2')->name('onas2');
 });

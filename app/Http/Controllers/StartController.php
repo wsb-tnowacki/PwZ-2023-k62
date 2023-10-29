@@ -26,4 +26,10 @@ class StartController extends Controller
         //return view('ogolny.onas', ['zadania' => $zadania]);
         return view('ogolny.onas')->with('zadania',$zadania);
     }
+
+   /*  public function onas2(string $onas3, string $id )
+    {
+       echo "<p>ID: $id</p>";
+       echo "<p>Onas: $onas3</p>";
+    } */
 }
