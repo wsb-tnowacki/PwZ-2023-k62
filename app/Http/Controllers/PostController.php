@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,6 +27,7 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+    //public function store(PostStoreRequest $request)
     {
        // dump($request);
        // dd($request);
@@ -36,7 +38,14 @@ class PostController extends Controller
         'autor' => 'required|min:2',
         'email' => 'required|email:rfc,dns',
         'tresc' => 'required|min:5'
-       ]);
+       ],
+       [
+        'required' => "Pole jest wymagane",
+            'min' => "Minimalna liczba znaków to :min",
+            'max' => "Maksymalna liczba znaków to :max",
+            'email' => "Podaj prawidłowego maila"
+       ]
+    );
        return redirect()->route('posty.index')->with('message',"Post został poprawnie dodany");
     }
 
