@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posty.create');
     }
 
     /**
@@ -27,7 +27,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dump($request);
+       // dd($request);
+       //$request->dump();
+
+       $request->validate([
+        'tytul' => 'required|min:3|max:150',
+        'autor' => 'required|min:2',
+        'email' => 'required|email:rfc,dns',
+        'tresc' => 'required|min:5'
+       ]);
+       return redirect()->route('posty.index')->with('message',"Post został poprawnie dodany");
     }
 
     /**
