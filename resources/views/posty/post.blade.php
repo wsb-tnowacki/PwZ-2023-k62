@@ -61,6 +61,9 @@ Szczegóły posta
 </div>
 <br>
 <a href="{{ route('posty.index') }}"><button class="btn btn-primary" type="button">Powrót do listy postów</button></a>
+@auth
 <a href="{{ route('posty.edit', $post->id) }}"><button class="btn btn-success" type="button">Edycja postu</button></a>
+@endauth
+
 </form>
 @endsection

@@ -32,4 +32,9 @@ class StartController extends Controller
        echo "<p>ID: $id</p>";
        echo "<p>Onas: $onas3</p>";
     } */
+    public function wyloguj()
+    {
+        auth()->logout();
+        return redirect()->route('start');
+    }
 }

@@ -62,6 +62,9 @@ Formularz edycji posta
 </div>
 <br>
 <a href="{{ route('posty.index') }}"><button class="btn btn-primary" type="button">Powrót do listy postów</button></a>
-<button class="btn btn-success" type="submit">Uaktualnij posta</button>
+@auth
+<button class="btn btn-success" type="submit">Uaktualnij posta</button> 
+@endauth
+
 </form>
 @endsection
