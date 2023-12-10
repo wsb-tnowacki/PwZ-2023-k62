@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
 use App\Models\Posty;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -17,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posty = Posty::all();
+        //$posty = Posty::all();
+        $posty = Posty::with('user')->paginate(5);
         return view('posty.index', compact('posty'));
     }
 
@@ -54,9 +56,11 @@ class PostController extends Controller
     ); */
         $posty = new Posty();
         $posty->tytul = request('tytul');
-        $posty->autor = request('autor');
+        //$posty->autor = request('autor');
+        $posty->autor = Auth::user()->name;
         $posty->email = request('email');
         $posty->tresc = request('tresc');
+        $posty->user_id = Auth::user()->id;
         $posty->save();
        return redirect()->route('posty.index')->with('message',"Post został poprawnie dodany");
     }
@@ -68,7 +72,7 @@ class PostController extends Controller
     {
         //
         //echo "Show: $id";
-        $post = Posty::findOrFail($id);
+        $post = Posty::with('user')->findOrFail($id);
         return view('posty.post', compact('post'));
     }
 
@@ -90,9 +94,10 @@ class PostController extends Controller
         //echo "Update: $id";
         $post = Posty::findOrFail($id);
         $post->tytul = request('tytul');
-        $post->autor = request('autor');
+        //$post->autor = Auth::user()->name;
         $post->email = request('email');
         $post->tresc = request('tresc');
+        $post->user_id = Auth::user()->id;
         $post->update();
         return redirect()->route('posty.index')->with('message',"Post został poprawnie uaktualniony");
     }

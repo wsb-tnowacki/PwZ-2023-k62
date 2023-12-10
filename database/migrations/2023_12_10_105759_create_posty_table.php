@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('autor', 100);
             $table->string('email', 100);
             $table->text('tresc');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
