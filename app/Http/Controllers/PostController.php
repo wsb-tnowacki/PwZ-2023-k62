@@ -73,7 +73,9 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //echo "Edit: $id";
+        $post = Posty::findOrFail($id);
+        return view('posty.edit', compact('post'));
     }
 
     /**
@@ -81,7 +83,14 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //echo "Update: $id";
+        $post = Posty::findOrFail($id);
+        $post->tytul = request('tytul');
+        $post->autor = request('autor');
+        $post->email = request('email');
+        $post->tresc = request('tresc');
+        $post->update();
+        return redirect()->route('posty.index')->with('message',"Post został poprawnie uaktualniony");
     }
 
     /**
@@ -89,6 +98,6 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        echo "Destroy: $id";
     }
 }
