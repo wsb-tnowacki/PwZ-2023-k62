@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
+use App\Models\Posty;
 
 class PostController extends Controller
 {
@@ -26,14 +27,14 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    //public function store(PostStoreRequest $request)
+    //public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
        // dump($request);
        // dd($request);
        //$request->dump();
 
-       $request->validate([
+       /* $request->validate([
         'tytul' => 'required|min:3|max:150',
         'autor' => 'required|min:2',
         'email' => 'required|email:rfc,dns',
@@ -45,7 +46,13 @@ class PostController extends Controller
             'max' => "Maksymalna liczba znaków to :max",
             'email' => "Podaj prawidłowego maila"
        ]
-    );
+    ); */
+        $posty = new Posty();
+        $posty->tytul = request('tytul');
+        $posty->autor = request('autor');
+        $posty->email = request('email');
+        $posty->tresc = request('tresc');
+        $posty->save();
        return redirect()->route('posty.index')->with('message',"Post został poprawnie dodany");
     }
 
