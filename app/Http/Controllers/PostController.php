@@ -98,6 +98,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        echo "Destroy: $id";
+        //echo "Destroy: $id";
+        $post = Posty::findOrFail($id);
+        $post->delete();
+        return redirect()->route('posty.index')->with('message',"Post został poprawnie usunięty");
     }
 }
