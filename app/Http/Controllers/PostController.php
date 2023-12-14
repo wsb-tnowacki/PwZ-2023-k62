@@ -62,7 +62,7 @@ class PostController extends Controller
         $posty->tresc = request('tresc');
         $posty->user_id = Auth::user()->id;
         $posty->save();
-       return redirect()->route('posty.index')->with('message',"Post został poprawnie dodany");
+       return redirect()->route('posty.index')->with('message',"Post został poprawnie dodany")->with('class', 'success');
     }
 
     /**
@@ -99,7 +99,7 @@ class PostController extends Controller
         $post->tresc = request('tresc');
         $post->user_id = Auth::user()->id;
         $post->update();
-        return redirect()->route('posty.index')->with('message',"Post został poprawnie uaktualniony");
+        return redirect()->route('posty.index')->with('message',"Post został poprawnie uaktualniony")->with('class', 'success');
     }
 
     /**
@@ -110,6 +110,6 @@ class PostController extends Controller
         //echo "Destroy: $id";
         $post = Posty::findOrFail($id);
         $post->delete();
-        return redirect()->route('posty.index')->with('message',"Post został poprawnie usunięty");
+        return redirect()->route('posty.index')->with('message',"Post został poprawnie usunięty")->with('class', 'danger');
     }
 }
